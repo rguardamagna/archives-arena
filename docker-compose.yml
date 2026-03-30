@@ -1,0 +1,49 @@
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tuber-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_ID=${PROJECT_ID}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-credentials.json
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - FIREBASE_AUTH_EMULATOR_HOST=firebase-emulator:9099
+      - FIRESTORE_EMULATOR_HOST=firebase-emulator:8080
+    volumes:
+      - ./gcp-credentials.json:/app/gcp-credentials.json:ro
+    depends_on:
+      - firebase-emulator
+    restart: unless-stopped
+
+  firebase-emulator:
+    image: spine3/firebase-emulator:latest
+    container_name: tuber-emulator
+    ports:
+      - "9099:9099"
+      - "8080:8080"
+      - "4000:4000"
+    environment:
+      - PROJECT_ID=${PROJECT_ID}
+    volumes:
+      - ./firebase.json:/home/node/firebase.json
+      - ./firestore.rules:/home/node/firestore.rules
+      - ./firestore.indexes.json:/home/node/firestore.indexes.json
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tuber-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+networks:
+  default:
+    name: tuber-network
