@@ -1,7 +1,7 @@
 # 🎮 TubeRPG: E2E Learning Arena
 
 ## 📝 Resumen del Proyecto
-**TubeRPG** es una plataforma de aprendizaje gamificada que transforma videos de YouTube en niveles de un RPG. Utiliza un motor de IA (Gemini 2.0 Flash/Pro) para analizar transcripciones en tiempo real y generar desafíos de combate basados estrictamente en el contenido del video. 
+**TubeRPG** es una plataforma de aprendizaje gamificada que transforma videos de YouTube en niveles de un RPG. Utiliza un motor de IA (Gemini 3.0 Flash/Pro) para analizar transcripciones en tiempo real y generar desafíos de combate basados estrictamente en el contenido del video. 
 
 El objetivo es acelerar la retención de conocimientos mediante el ciclo de "Estudio -> Combate -> Progreso".
 
